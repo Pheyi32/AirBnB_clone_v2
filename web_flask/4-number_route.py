@@ -34,7 +34,7 @@ def c_with_text(text):
 
 
 # Define the route for '/python/(<text>)'
-@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+@app.route('/python/', defaults={'text', 'is_cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_with_text(text):
     """ Displays 'Python' followed by the value of <text>.
@@ -44,6 +44,13 @@ def python_with_text(text):
     # Replace underscores with spaces in the text variable
     formatted_text = text.replace('_', ' ')
     return "Python {}".format(formatted_text)
+
+
+# Define the route for '/number/<n>'
+@app.route('/number/<int:n>', strict_slashes=False)
+def number(n):
+    """ Displays 'n is a number' only if n is an integer."""
+    return "{} is a number".format(n) 
 
 
 if __name__ == "__main__":
